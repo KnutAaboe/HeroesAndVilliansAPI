@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SuperHeroesAPI.Controllers
+namespace SuperHero.Controllers
 {
     [ApiController]
     [Route("[controller]")]
