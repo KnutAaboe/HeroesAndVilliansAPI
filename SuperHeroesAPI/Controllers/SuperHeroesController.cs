@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HeroesAndVilliansAPI.Model;
+using Microsoft.AspNetCore.Mvc;
 using SuperHeroesAPI.Data;
 using SuperHeroesAPI.Model;
 using System;
@@ -14,15 +15,69 @@ namespace SuperHeroesAPI.Controllers
     {
         private readonly ApiFetcher data = new ApiFetcher();
 
-        [HttpGet("{id}")]
-        public ActionResult<SuperHero> Get(string id)
+        //All info om en superhelt/villain
+        [HttpGet("GetAllInfo/{id}/")]
+        public ActionResult<AllinfoHV.Root> GetHeroVillianInfo(string id)
         {
-            SuperHero suop = data.GetSuperHero(id);
-            return Ok(suop);
+            AllinfoHV.Root allInfo = data.GetHeroVillianInfoByID(id);
+            if (allInfo != null)
+            {
+                return Ok(allInfo); 
+            } else
+            {
+                return NotFound();
+            }
         }
 
+        //Navn på alle superhelt/Villain i apiet - type of ratio to choose all - superhero - villain
+        [HttpGet("getNames/")]
+        public ActionResult<IEnumerable<String>> GetHeroesVillians(int startID, string alignment)
+        {
+            List<string> allHeroes = data.GetAllHeroesVillians(startID, alignment);
+            if (allHeroes != null)
+            {
 
-       
+                return Ok(allHeroes);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        //Ìmplementer search apiet 
+
+
+        //Implementer pvp apiet 
+        [HttpGet("comparisons/")]
+        public ActionResult<IEnumerable<Comparisons.Roots>> HeroesVilliansComparisons(string id, string id2)
+        {
+            List<Comparisons.Roots> chosenHeroes = data.HeroesVilliansStats(id, id2);
+            if (chosenHeroes != null)
+            {
+
+                return Ok(chosenHeroes);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("startsORcontains/")]
+        public ActionResult<IEnumerable<Search.Data>> GetHeroesVilliansByLetters(string letters, string where)
+        {
+            Search.Data foundHeroesVillians = data.SearchForHeroesVillians(letters, where);
+            if (foundHeroesVillians != null)
+            {
+
+                return Ok(foundHeroesVillians);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
     }
 }

@@ -1,7 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using HeroesAndVilliansAPI.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SuperHeroesAPI.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,101 +17,230 @@ namespace SuperHeroesAPI.Data
     {
 
         private readonly string apiKey = "4119716678052887";
-        //private readonly string apiKey = API.APIKEY;
 
-        public IEnumerable<SuperHero> GetSuperHeroes()
+        public AllinfoHV.Root GetHeroVillianInfoByID(string id)
         {
-            var soups = Fetcher.getSuperHeroes(apiKey);
-            return soups;
+            string baseURL = "https://superheroapi.com/api/";
+            string endURL = "/" + id;
+            string method = "GET";
+            JObject parsedObject = GetJsonData(baseURL, endURL, method);
+
+            string jsonData = parsedObject.ToString();
+            AllinfoHV.Root allInfoSH = JsonConvert.DeserializeObject<AllinfoHV.Root>(jsonData);
+
+            if (allInfoSH.response == "success")
+            {
+                return allInfoSH;
+            } else
+            {
+                return null;
+            }
+        }
+
+         public List<string> GetAllHeroesVillians(int startID, string alignment)
+        {
+
+            string baseURL = "https://superheroapi.com/api/";
+            string method = "GET";
+            List<string> superHeroes = new();
+            bool more = true;
+            int id = startID;
+            int max = 100;
+
+            do //works without the max thing
+            {
+                string endURL = "/" + id;
+                JObject parsedObject = GetJsonData(baseURL, endURL, method);
+                string jsonData = parsedObject.ToString();
+                string addToList;
+
+                Names.Rooot superbio = JsonConvert.DeserializeObject<Names.Rooot>(jsonData);
+                if (superbio.biography != null)
+                {
+                    if (alignment == "good" || alignment == "bad") { 
+
+
+                    if (superbio.biography.alignment.Equals(alignment))
+                    {
+                        switch (!(superbio.biography.FullName.Equals("")))
+                        {
+                            case true:
+                                addToList = id.ToString() + " | img: " + superbio.image.url + " | " + superbio.biography.FullName + ", aka " + superbio.name;
+                                break;
+
+                            default:
+                                addToList = id.ToString() + " | img: " + superbio.image.url + " | " + superbio.name;
+                                break;
+                        }
+
+                        superHeroes.Add(addToList);
+
+                    }
+
+                    
+                } else if (alignment == null)
+                    {
+                        
+                            switch (!(superbio.biography.FullName.Equals("")))
+                            {
+                                case true:
+                                    addToList = id.ToString() + " | img: " + superbio.image.url + " | " + superbio.biography.FullName + ", aka " + superbio.name;
+                                    break;
+
+                                default:
+                                    addToList = id.ToString() + " | img: " + superbio.image.url + " | " + superbio.name;
+                                    break;
+                            }
+
+                            superHeroes.Add(addToList);
+
+
+                    }
+                    id++;
+                    more = true;
+
+                }
+                else
+                {
+                    more = false;
+                    break;
+                }
+            } while (more == true && !(id - startID == max)); //&& !(id - startID == max)
+
+            if (superHeroes.Count < 1)
+            {
+                return null;
+            } else
+            {
+                return superHeroes;
+            }
+
+
+        }
+
+        public Search.Data SearchForHeroesVillians(string letters, string where)
+        {
+
+            if (!(letters.Equals("")))
+            {
+                string baseURL = "https://superheroapi.com/api/";
+                string method = "GET";
+                List<string> superHeroes = new();
+
+                string endURL = "/search/" + letters;
+                JObject parsedObject = GetJsonData(baseURL, endURL, method);
+                string jsonData = parsedObject.ToString();
+
+                Search.Data heroesVillians = JsonConvert.DeserializeObject<Search.Data>(jsonData);
+
+
+                switch (where)
+                {
+                    case "starts":
+
+                        foreach (Search.Result hv in heroesVillians.results.ToList()) {
+
+                            if (!(hv.name.ToLower().StartsWith(letters.ToLower())))
+                            {
+                                heroesVillians.results.Remove(hv);
+                            }
+                            Debug.WriteLine(hv.name.StartsWith(letters));
+                            
+
+                        }
+                        return heroesVillians;                      
+
+                    case "contains":
+                        return heroesVillians;
+
+                    default:
+                        return heroesVillians;
+
+                }
+                
+
+            }
+
+            return null;
             
-        }
 
-        public SuperHero GetSuperHero(string id)
-        {
-            SuperHero soup = Fetcher.getSuperHeroById(id, apiKey);
-            return soup;
+            
+
 
         }
-    }
 
-    public static class Fetcher
-    {
-        public static async SuperHero getSuperHeroById(string id, string api_key)
+        public List<Comparisons.Roots> HeroesVilliansStats(string id, string id2)
         {
-            string url = string.Format("https://www.superheroapi.com/api.php/" + api_key + "/" + id + "/powerstats"); //4119716678052887/287/biography
-            WebRequest reqObj = WebRequest.Create(url);
-            reqObj.Method = "GET";
+            string baseURL = "https://superheroapi.com/api/";
+            string method = "GET";
+            List<Comparisons.Roots> comparisonsList = new();
+            List<string> ids = new();
+            ids.Add(id);
+            ids.Add(id2);
 
+            for (int i = 0; i < ids.Count; i++)
+            {
+                string endURL = "/" + ids[i];
+                JObject parsedObject = GetJsonData(baseURL, endURL, method);
+                string jsonData = parsedObject.ToString();
+
+                Comparisons.Roots chosenCV = JsonConvert.DeserializeObject<Comparisons.Roots>(jsonData);
+                if (chosenCV != null)
+                {
+                    comparisonsList.Add(chosenCV);
+                }else
+                {
+                    break;
+                }          
+         
+            }
+            return comparisonsList;
+
+        }
+
+
+
+
+        public JObject GetJsonData(string baseURL, string endURL, string method)
+        {
+            string url = String.Format(baseURL + apiKey + endURL);
+            WebRequest requestObject = WebRequest.Create(url);
+            requestObject.Method = method;
+
+            string jsonReturn = Fetch(requestObject);
+            return JObject.Parse(jsonReturn);
+
+
+
+        }
+
+
+
+        public String Fetch (WebRequest requestObject)
+        {
             try
             {
+                HttpWebResponse responseObject = (HttpWebResponse)requestObject.GetResponse();
+                string response = "";
 
-                HttpWebResponse resObj = (HttpWebResponse)reqObj.GetResponse();
-
-                string result = "";
-                using (Stream stream = resObj.GetResponseStream())
+                using (Stream stream = responseObject.GetResponseStream())
                 {
-                    StreamReader streamR = new StreamReader(stream);
-                    result = streamR.ReadToEnd();
-                    streamR.Close();
-
-
+                    StreamReader streamReader = new StreamReader(stream);
+                    response = streamReader.ReadToEnd();
+                    streamReader.Close();
                 }
-                System.Diagnostics.Debug.WriteLine(result);
 
-                SuperHero suop = JsonConvert.DeserializeObject<SuperHero>(result);
-                return suop;
+                return response;
 
-            } catch (WebException e)
-            {
-                System.Console.WriteLine(e.Message);
-                return new SuperHero { };
             }
-            
+            catch (WebException error)
+            {
+                System.Console.WriteLine(error.Message);
+                return error.ToString();
+            }
         }
 
-        public static async IEnumerable<SuperHero> getSuperHeroes(string api_key)
-        {
-            bool isObject = true;
-            do
-            {
-                if (1 == 1)
-                {
-
-
-
-
-                }
-            } while (isObject);
-
-            string url = string.Format("https://www.superheroapi.com/api.php/" + api_key + "/" + id + "/powerstats"); //4119716678052887/287/biography
-            WebRequest reqObj = WebRequest.Create(url);
-            reqObj.Method = "GET";
-
-            try
-            {
-
-                HttpWebResponse resObj = (HttpWebResponse)reqObj.GetResponse();
-
-                string result = "";
-                using (Stream stream = resObj.GetResponseStream())
-                {
-                    StreamReader streamR = new StreamReader(stream);
-                    result = streamR.ReadToEnd();
-                    streamR.Close();
-
-
-                }
-                System.Diagnostics.Debug.WriteLine(result);
-
-            }
-            catch (WebException e)
-            {
-                System.Console.WriteLine(e.Message);
-            }
-
-        }
-
+        
     }
 
 }
-

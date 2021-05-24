@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\knuta\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\knuta\\.nuget\\packages"
-    ]
-  }
-}
