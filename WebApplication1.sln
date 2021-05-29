@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebAppli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeroesAndVilliansAPI", "SuperHeroesAPI\HeroesAndVilliansAPI.csproj", "{1ED199B4-2B5F-4D25-A7BE-8E9FD705A7EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp", "BlazorApp\BlazorApp.csproj", "{B8CC3BDA-BF84-4165-8D8F-858FF861A194}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1ED199B4-2B5F-4D25-A7BE-8E9FD705A7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1ED199B4-2B5F-4D25-A7BE-8E9FD705A7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1ED199B4-2B5F-4D25-A7BE-8E9FD705A7EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8CC3BDA-BF84-4165-8D8F-858FF861A194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8CC3BDA-BF84-4165-8D8F-858FF861A194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8CC3BDA-BF84-4165-8D8F-858FF861A194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8CC3BDA-BF84-4165-8D8F-858FF861A194}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

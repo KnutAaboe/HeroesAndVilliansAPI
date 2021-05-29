@@ -15,8 +15,8 @@ namespace SuperHeroesAPI.Data
 
     public class ApiFetcher : IApiFetcher
     {
-
-        private readonly string apiKey = "4119716678052887";
+        //Need your own apiKey
+        private readonly string apiKey = "";
 
         public AllinfoHV.Root GetHeroVillianInfoByID(string id)
         {
@@ -53,6 +53,11 @@ namespace SuperHeroesAPI.Data
                 JObject parsedObject = GetJsonData(baseURL, endURL, method);
                 string jsonData = parsedObject.ToString();
                 string addToList;
+                string spacing = "";
+                if (id <= 9) { spacing = "   "; }
+                else if (id <= 99) { spacing = "  "; }
+                else if (id > 99) { spacing = " "; }
+
 
                 Names.Rooot superbio = JsonConvert.DeserializeObject<Names.Rooot>(jsonData);
                 if (superbio.biography != null)
@@ -65,11 +70,11 @@ namespace SuperHeroesAPI.Data
                         switch (!(superbio.biography.FullName.Equals("")))
                         {
                             case true:
-                                addToList = id.ToString() + " | img: " + superbio.image.url + " | " + superbio.biography.FullName + ", aka " + superbio.name;
+                                addToList = id.ToString() + spacing + "img: " + superbio.image.url + " | " + superbio.biography.FullName + ", aka " + superbio.name;
                                 break;
 
                             default:
-                                addToList = id.ToString() + " | img: " + superbio.image.url + " | " + superbio.name;
+                                addToList = id.ToString() + spacing + "| img: " + superbio.image.url + " | " + superbio.name;
                                 break;
                         }
 
@@ -84,11 +89,11 @@ namespace SuperHeroesAPI.Data
                             switch (!(superbio.biography.FullName.Equals("")))
                             {
                                 case true:
-                                    addToList = id.ToString() + " | img: " + superbio.image.url + " | " + superbio.biography.FullName + ", aka " + superbio.name;
+                                    addToList = id.ToString() + spacing + "| img: " + superbio.image.url + " | " + superbio.biography.FullName + ", aka " + superbio.name;
                                     break;
 
                                 default:
-                                    addToList = id.ToString() + " | img: " + superbio.image.url + " | " + superbio.name;
+                                    addToList = id.ToString() + spacing + "| img: " + superbio.image.url + " | " + superbio.name;
                                     break;
                             }
 
