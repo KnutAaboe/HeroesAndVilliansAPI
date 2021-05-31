@@ -1,5 +1,4 @@
 ﻿Implementer:
-	- Search apiet
-	- PVP apiet
 
 	- App løsning (blazor?)
+	- Error code 500

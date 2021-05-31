@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SuperHeroesAPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,6 @@ namespace HeroesAndVilliansAPI.Model
 {
     public class Names
     {
-
-
-
             public class Bio
             {
                 [JsonProperty("full-name")]
@@ -18,17 +16,12 @@ namespace HeroesAndVilliansAPI.Model
                 public string alignment { get; set; }
             }
 
-            public class Img
-            {
-                public string url { get; set; }
-            }
-
             public class Rooot
             {
                 public string id { get; set; }
                 public string name { get; set; }
                 public Bio biography { get; set; }
-                public Img image { get; set; }
+                public AllinfoHV.Image image { get; set; }
             }
 
 

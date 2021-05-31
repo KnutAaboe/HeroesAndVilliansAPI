@@ -29,3 +29,12 @@ C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\obj\Debug\net5.0\He
 C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\obj\Debug\net5.0\ref\HeroesAndVilliansAPI.dll
 C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\obj\Debug\net5.0\HeroesAndVilliansAPI.pdb
 C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\obj\Debug\net5.0\HeroesAndVilliansAPI.genruntimeconfig.cache
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\Scrutor.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\System.Web.Http.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\System.Web.Http.WebHost.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

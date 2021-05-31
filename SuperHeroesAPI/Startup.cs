@@ -7,10 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace SuperHeroesAPI
 {
@@ -26,12 +28,20 @@ namespace SuperHeroesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperHeroesAPI", Version = "v1" });
+                c.ExampleFilters();
+                c.EnableAnnotations();
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HeroesVilliansAPI", Version = "v1" });
             });
+            //GlobalConfiguration.Configuration.EnableSwagger(c =>
+            //    {
+
+            //});
+            services.AddSwaggerExamplesFromAssemblyOf<Startup>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

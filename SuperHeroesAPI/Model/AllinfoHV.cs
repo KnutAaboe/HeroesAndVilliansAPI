@@ -8,7 +8,7 @@ namespace SuperHeroesAPI.Model
 {
     public class AllinfoHV
     {
-        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
+        
         public class Powerstats
         {
             public string intelligence { get; set; }
@@ -71,7 +71,6 @@ namespace SuperHeroesAPI.Model
 
         public class Root
         {
-            public string response { get; set; }
             public string id { get; set; }
             public string name { get; set; }
             public Powerstats powerstats { get; set; }

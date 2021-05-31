@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SuperHeroesAPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,22 +9,17 @@ namespace HeroesAndVilliansAPI.Model
 {
     public class Search
     {
-        public class Imagee
-        {
-            public string url { get; set; }
-        }
 
         public class Result
         {
             public string id { get; set; }
             public string name { get; set; }
-            public Imagee image { get; set; } 
+            public AllinfoHV.Image image { get; set; } 
         }
 
-        public class Data
+        public class Results
         {
 
-            public string response { get; set; }
             [JsonProperty("results-for")]
             public string ResultFor { get; set; }
             public List<Result> results { get; set; }

@@ -16,7 +16,7 @@ namespace SuperHeroesAPI.Data
     public class ApiFetcher : IApiFetcher
     {
         //Need your own apiKey
-        private readonly string apiKey = "";
+        private readonly string apiKey = ""; 
 
         public AllinfoHV.Root GetHeroVillianInfoByID(string id)
         {
@@ -28,7 +28,7 @@ namespace SuperHeroesAPI.Data
             string jsonData = parsedObject.ToString();
             AllinfoHV.Root allInfoSH = JsonConvert.DeserializeObject<AllinfoHV.Root>(jsonData);
 
-            if (allInfoSH.response == "success")
+            if (allInfoSH.name != null)
             {
                 return allInfoSH;
             } else
@@ -60,7 +60,7 @@ namespace SuperHeroesAPI.Data
 
 
                 Names.Rooot superbio = JsonConvert.DeserializeObject<Names.Rooot>(jsonData);
-                if (superbio.biography != null)
+                if (superbio.biography != null || (startID < 0 && startID > 732))
                 {
                     if (alignment == "good" || alignment == "bad") { 
 
@@ -74,7 +74,7 @@ namespace SuperHeroesAPI.Data
                                 break;
 
                             default:
-                                addToList = id.ToString() + spacing + "| img: " + superbio.image.url + " | " + superbio.name;
+                                addToList = id.ToString() + spacing + "img: " + superbio.image.url + " | " + superbio.name;
                                 break;
                         }
 
@@ -83,7 +83,7 @@ namespace SuperHeroesAPI.Data
                     }
 
                     
-                } else if (alignment == null)
+                } else if (alignment == "all")
                     {
                         
                             switch (!(superbio.biography.FullName.Equals("")))
@@ -123,7 +123,7 @@ namespace SuperHeroesAPI.Data
 
         }
 
-        public Search.Data SearchForHeroesVillians(string letters, string where)
+        public Search.Results SearchForHeroesVillians(string letters, string where)
         {
 
             if (!(letters.Equals("")))
@@ -136,7 +136,7 @@ namespace SuperHeroesAPI.Data
                 JObject parsedObject = GetJsonData(baseURL, endURL, method);
                 string jsonData = parsedObject.ToString();
 
-                Search.Data heroesVillians = JsonConvert.DeserializeObject<Search.Data>(jsonData);
+                Search.Results heroesVillians = JsonConvert.DeserializeObject<Search.Results>(jsonData);
 
 
                 switch (where)
@@ -167,18 +167,14 @@ namespace SuperHeroesAPI.Data
             }
 
             return null;
-            
-
-            
-
 
         }
 
-        public List<Comparisons.Roots> HeroesVilliansStats(string id, string id2)
+        public List<Comparisons.Data> HeroesVilliansStats(string id, string id2)
         {
             string baseURL = "https://superheroapi.com/api/";
             string method = "GET";
-            List<Comparisons.Roots> comparisonsList = new();
+            List<Comparisons.Data> comparisonsList = new();
             List<string> ids = new();
             ids.Add(id);
             ids.Add(id2);
@@ -188,10 +184,12 @@ namespace SuperHeroesAPI.Data
                 string endURL = "/" + ids[i];
                 JObject parsedObject = GetJsonData(baseURL, endURL, method);
                 string jsonData = parsedObject.ToString();
+                Debug.WriteLine(jsonData);
 
-                Comparisons.Roots chosenCV = JsonConvert.DeserializeObject<Comparisons.Roots>(jsonData);
+                Comparisons.Data chosenCV = JsonConvert.DeserializeObject<Comparisons.Data>(jsonData);
                 if (chosenCV != null)
                 {
+                    //Debug.WriteLine(chosenCV.ToString());
                     comparisonsList.Add(chosenCV);
                 }else
                 {

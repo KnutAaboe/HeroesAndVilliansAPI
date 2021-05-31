@@ -12,8 +12,8 @@ namespace SuperHeroesAPI.Data
         //IEnumerable<SuperHero> GetSuperHeroes();
         AllinfoHV.Root GetHeroVillianInfoByID(string id);
         List<string> GetAllHeroesVillians(int startID, string alignment);
-        Search.Data SearchForHeroesVillians(string letters, string where);
-        List<Comparisons.Roots> HeroesVilliansStats(string id, string id2);
+        Search.Results SearchForHeroesVillians(string letters, string where);
+        List<Comparisons.Data> HeroesVilliansStats(string id, string id2);
 
 
 
