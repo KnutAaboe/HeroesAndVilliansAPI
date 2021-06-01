@@ -20,12 +20,15 @@ namespace SuperHeroesAPI.Controllers
     {
         private readonly ApiFetcher data = new ApiFetcher();
 
+        /// <param name="id">Identity of file to download.</param>
+        /// <returns> file content found.</returns>
         [HttpGet("GetAllInfo/{id}")]
         [SwaggerOperation(Summary = "Gets all their information", Description = "Gets all the information there is, on this API, about Heroes/Villians by givving their ID.")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(AllinfoHV.Root))]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(AllinfoExample))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(string))]
         [SwaggerResponseExample((int)HttpStatusCode.NotFound, typeof(NotFoundExample))]
+        //[RequireHttps()]
         public ActionResult<AllinfoHV.Root> GetHeroVillianInfo(string id)
         {
             AllinfoHV.Root allInfo = data.GetHeroVillianInfoByID(id);
@@ -66,7 +69,8 @@ namespace SuperHeroesAPI.Controllers
         //Implementer pvp apiet (ordne med navn istedenfor id?)
         [HttpGet("Comparisons/{id}&&{id2}")]
         [SwaggerOperation(Summary = "Comparing two hero/villian given id", Description = "Comparing two hero/villian given their id, this includes powerstats")]
-
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(List<Comparisons.Data>))]
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(ComparisonsExample))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(string))]
         [SwaggerResponseExample((int)HttpStatusCode.NotFound, typeof(NotFoundExample))]
         public ActionResult<IEnumerable<Comparisons.Data>> HeroesVilliansComparisons(string id, string id2)
@@ -85,6 +89,8 @@ namespace SuperHeroesAPI.Controllers
 
         [HttpGet("StartsORcontains/{letters}&&{where}")]
         [SwaggerOperation(Summary = "Gives heroes/villians name and id maching given letters", Description = "Gives heroes/villians name and id maching given letter/letters. Where - starts - contains, contains is default")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Search.Results))]
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(GetHVGivenLettersExample))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(string))]
         [SwaggerResponseExample((int)HttpStatusCode.NotFound, typeof(NotFoundExample))]
         public ActionResult<IEnumerable<Search.Results>> GetHeroesVilliansByLetters(string letters, string where)

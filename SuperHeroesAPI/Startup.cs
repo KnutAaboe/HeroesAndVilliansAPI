@@ -32,8 +32,10 @@ namespace SuperHeroesAPI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
+                //To be able to show response examples
                 c.ExampleFilters();
-                c.EnableAnnotations();
+                //To be able to use SwashBuckle Annotations
+                //c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HeroesVilliansAPI", Version = "v1" });
             });
             //GlobalConfiguration.Configuration.EnableSwagger(c =>
@@ -51,7 +53,11 @@ namespace SuperHeroesAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SuperHeroesAPI v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SuperHeroesAPI v1");
+                    //c.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseHttpsRedirection();
