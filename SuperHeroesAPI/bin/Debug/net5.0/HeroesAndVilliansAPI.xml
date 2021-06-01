@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HeroesAndVilliansAPI</name>
+    </assembly>
+    <members>
+        <member name="M:SuperHeroesAPI.Controllers.HeroesAndVilliansController.GetHeroVillianInfo(System.String)">
+            <param name="id">Identity number of the Heroes and Villians.</param>
+        </member>
+        <member name="M:SuperHeroesAPI.Controllers.HeroesAndVilliansController.GetHeroesVillians(System.Int32,System.String)">
+            <param name="startID">The identity number you want to start from (max 100 iterations, like 0 - 100)</param>
+            <param name="alignment">For both heroes and villians => all. For only Heroes => good. For only Villians => bad</param>
+        </member>
+        <member name="M:SuperHeroesAPI.Controllers.HeroesAndVilliansController.HeroesVilliansComparisons(System.String,System.String)">
+            <param name="id">The identity number of the Hero or Villian.</param>
+            <param name="id2">The identity number of the second Hero ir Villian.</param>
+        </member>
+        <member name="M:SuperHeroesAPI.Controllers.HeroesAndVilliansController.GetHeroesVilliansByLetters(System.String,System.String)">
+            <param name="letters">The letters starting/containing your hero/villian.</param>
+            <param name="where">Where your letters are, starts or contains.</param>
+        </member>
+    </members>
+</doc>

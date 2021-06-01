@@ -38,3 +38,5 @@ C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\Sy
 C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\System.Web.Http.dll
 C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\System.Web.Http.WebHost.dll
 C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\bin\Debug\net5.0\HeroesAndVilliansAPI.xml
+C:\Users\Knut\Development\DAT190\SuperHeroApi\SuperHeroesAPI\obj\Debug\net5.0\HeroesAndVilliansAPI.xml
