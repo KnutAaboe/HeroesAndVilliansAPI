@@ -16,7 +16,7 @@ namespace SuperHeroesAPI.Data
     public class ApiFetcher : IApiFetcher
     {
         //Need your own apiKey
-        private readonly string apiKey = ""; 
+        private readonly string apiKey = "4119716678052887"; 
 
         public AllinfoHV.Root GetHeroVillianInfoByID(string id)
         {

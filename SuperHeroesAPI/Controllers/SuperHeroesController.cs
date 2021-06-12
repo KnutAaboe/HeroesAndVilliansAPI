@@ -19,7 +19,6 @@ namespace SuperHeroesAPI.Controllers
     public class HeroesAndVilliansController : ControllerBase
     {
         private readonly ApiFetcher data = new ApiFetcher();
-
         /// <param name="id">Identity number of the Heroes and Villians.</param>
         [HttpGet("GetAllInfo/{id}")]
         [SwaggerOperation(Summary = "Gets all their information", Description = "Gets all the information there is, on this API, about Heroes/Villians by givving their ID.")]
